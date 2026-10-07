@@ -33,6 +33,7 @@ function normSlide(s) {
     body: s.body ?? '',
     textColor: s.textColor ?? null,      // Fallback-Farbe (Migration/alle)
     colors: s.colors || {},              // Farbe pro Feld: { headline:'#..', subline:'#..', ... }
+    fontSizes: s.fontSizes || {},        // individuelle Schriftgrößen pro Textfeld
     pos: s.pos || {},                    // { kicker:{x,y}, headline:{x,y}, ... } Offsets 0..1
     background: {
       assetId: s.background?.assetId ?? null,
