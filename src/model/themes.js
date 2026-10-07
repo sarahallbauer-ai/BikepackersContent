@@ -1,26 +1,56 @@
-// Themes = Palette + Schriftpaar. Heller Marken-Look: Gradient-Hintergrund,
-// Display-Text in der Marken-Schrift, Textfarbe kommt pro Slide aus der Marken-Palette.
+// Sara Hallpower Theme
+// Klar, warm, sportlich: echte Bilder im Fokus, wenig grafischer Ballast.
 
 import { DISPLAY_FONT, BODY_FONT } from './brand.js';
 
 export const THEMES = {
-  radunff: {
-    id: 'radunff',
-    label: 'Marke',
+  hallpower: {
+    id: 'hallpower',
+    label: 'Sara Hallpower',
     palette: {
-      ink: '#2b2b3a',        // dunkler Standardtext
-      paper: '#ffffff',
-      accent: '#1f6fb2',
-      scrim: '#06141a',
-      bgTop: '#e9ecf5',      // heller Fallback-Verlauf (falls kein Gradient)
-      bgBottom: '#f3ecf1',
+      ink: '#202321',
+      paper: '#F4F1EA',
+      accent: '#F28C28',
+      scrim: '#202321',
+      bgTop: '#F4F1EA',
+      bgBottom: '#E8E3D8',
+    },
+    fonts: { display: DISPLAY_FONT, body: BODY_FONT, serif: 'Georgia' },
+    motion: 'calm',
+  },
+
+  hallpowerWomen: {
+    id: 'hallpowerWomen',
+    label: 'Sara Hallpower · Women Ride',
+    palette: {
+      ink: '#202321',
+      paper: '#FFF8FA',
+      accent: '#D94F70',
+      scrim: '#202321',
+      bgTop: '#FFF3F6',
+      bgBottom: '#F7E4EA',
+    },
+    fonts: { display: DISPLAY_FONT, body: BODY_FONT, serif: 'Georgia' },
+    motion: 'calm',
+  },
+
+  hallpowerNature: {
+    id: 'hallpowerNature',
+    label: 'Sara Hallpower · Outdoor',
+    palette: {
+      ink: '#202321',
+      paper: '#F4F1EA',
+      accent: '#346B68',
+      scrim: '#1A2A29',
+      bgTop: '#E8EFEC',
+      bgBottom: '#DDE8E4',
     },
     fonts: { display: DISPLAY_FONT, body: BODY_FONT, serif: 'Georgia' },
     motion: 'calm',
   },
 };
 
-export const DEFAULT_THEME = 'radunff';
+export const DEFAULT_THEME = 'hallpower';
 
 export function getTheme(id) {
   return THEMES[id] || THEMES[DEFAULT_THEME];
