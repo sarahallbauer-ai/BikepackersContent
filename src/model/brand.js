@@ -1,22 +1,20 @@
-// Markenwerte: Textfarben (kräftige Kontrastfarben aus der Pastell-/Markenwelt)
-// und die Marken-Schrift. Zentral, damit leicht anpassbar.
+// Sara Hallpower Brand System
+// Zentral gepflegte Farben und Schriften für @sara_hallpower.
 
-// Marken-Display-Schrift: Name der LOKAL installierten Schrift hier eintragen.
-// Fallback ist Inter, solange die Schrift nicht installiert ist.
-export const BRAND_DISPLAY = 'Brand Display';
-export const DISPLAY_FONT = `'${BRAND_DISPLAY}', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif`;
+export const BRAND_DISPLAY = 'Inter';
+export const DISPLAY_FONT = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
 export const BODY_FONT = "Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
 
-// Umschaltbare Textfarben (Kontrast zu den hellen Gradienten).
+// Sara Hallpower Palette:
+// dunkel = klar/sportlich, offwhite = ruhig, orange = Energie,
+// petrol = Natur, pink = Women/Female Empowerment.
 export const TEXT_COLORS = [
-  { id: 'blau',      hex: '#1f6fb2' },
-  { id: 'dunkelblau',hex: '#164193' },
-  { id: 'magenta',   hex: '#e5007d' },
-  { id: 'rot',       hex: '#e2334a' },
-  { id: 'orange',    hex: '#ef7d00' },
-  { id: 'teal',      hex: '#2c9a86' },
-  { id: 'lila',      hex: '#7d4a9e' },
-  { id: 'anthrazit', hex: '#2b2b3a' },
+  { id: 'dunkel',   hex: '#202321' },
+  { id: 'offwhite', hex: '#F4F1EA' },
+  { id: 'orange',   hex: '#F28C28' },
+  { id: 'petrol',   hex: '#346B68' },
+  { id: 'pink',     hex: '#D94F70' },
+  { id: 'weiss',    hex: '#FFFFFF' },
 ];
 
-export const DEFAULT_TEXT_COLOR = '#1f6fb2';   // Marken-Blau (Default)
+export const DEFAULT_TEXT_COLOR = '#202321';
