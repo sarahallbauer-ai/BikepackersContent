@@ -4,6 +4,7 @@
 
 import { getFormat, safeRect } from '../model/formats.js';
 import { getTheme } from '../model/themes.js';
+import { getLayout } from '../model/layouts.js';
 import { getAsset, getLoadedImage } from '../model/assets.js';
 import { getPreset, staticReveal, prefersReducedMotion } from './motion.js';
 import { TYPE, fitFontSize } from './text-fit.js';
@@ -149,24 +150,27 @@ export function paintSlide(slide, deck, opts = {}) {
 
   const T = {}; TEXT_FIELDS.forEach((f) => { T[f] = mk(f); });
 
-  // GESAMTER Textblock (kicker/headline/subline/body) vertikal ZENTRIERT
-  // -> wächst symmetrisch aus der Mitte (auch die Dachzeile nach oben).
+  // Textblock je nach gewähltem Layout oben, mittig oder unten in der Safe-Area.
   const defY = {};
-  const mgap = { headline: fmt.h * 0.028, subline: fmt.h * 0.04, body: fmt.h * 0.012 };  // Abstand VOR dem Feld
+  const mgap = { headline: fmt.h * 0.028, subline: fmt.h * 0.04, body: fmt.h * 0.012 };
   const mainFields = ['kicker', 'headline', 'subline', 'body'].filter((f) => T[f]);
   const measure = () => {
     let tot = 0, first = true;
     mainFields.forEach((f) => { tot += (first ? 0 : (mgap[f] || gap)) + T[f].height(); first = false; });
     return tot;
   };
-  // Block-Auto-Fit: nur verkleinern, wenn der Block die Safe-Area überschreitet.
   let total = measure();
   if (total > safe.h) {
     const factor = safe.h / total;
     mainFields.forEach((f) => T[f].fontSize(Math.max(14, Math.floor(T[f].fontSize() * factor))));
     total = measure();
   }
-  let cursor = safe.y + (safe.h - total) / 2;
+
+  const layout = getLayout(slide.layout);
+  let cursor = safe.y;
+  if (layout.anchor === 'center') cursor = safe.y + (safe.h - total) / 2;
+  else if (layout.anchor === 'bottom') cursor = safe.y + safe.h - total;
+
   let firstMain = true;
   mainFields.forEach((f) => {
     if (!firstMain) cursor += (mgap[f] || gap);
