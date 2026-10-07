@@ -3,6 +3,7 @@
 // KEIN Inspector, KEIN JSON — alles passiert direkt auf der Slide.
 
 import { FORMATS } from '../model/formats.js';
+import { LAYOUTS } from '../model/layouts.js';
 import { assetsByType, loadAssetImage, getAsset, getLoadedImage, preloadDeckAssets, registerCustomAsset } from '../model/assets.js';
 import { generateDeck, MODELS, DEFAULT_MODEL } from '../ai/generate.js';
 import { TEXT_COLORS, DEFAULT_TEXT_COLOR } from '../model/brand.js';
@@ -26,6 +27,7 @@ export class UI {
     this._bindToolbar();
     this._bindTimeline();
     this._bindTray();
+    this._bindFontSize();
 
     renderer.onEditText = (field) => this.inlineEditor.open(field);
     renderer.onFrame = (t, dur) => this._syncTime(t, dur);
@@ -64,6 +66,13 @@ export class UI {
     ).join('');
     fmtSel.value = this.store.format;
     fmtSel.onchange = () => this.store.setFormat(fmtSel.value);
+
+    const layoutSel = document.getElementById('layoutSelect');
+    layoutSel.innerHTML = Object.values(LAYOUTS)
+      .map((l) => `<option value="${l.id}">${l.label}</option>`)
+      .join('');
+    layoutSel.value = this.store.slide.layout || 'text-bottom';
+    layoutSel.onchange = () => this.store.updateSlide({ layout: layoutSel.value }, 'layout');
     const safeBtn = document.getElementById('safeBtn');
     safeBtn.classList.toggle('active', this.renderer.showSafe);   // Startzustand spiegeln
     safeBtn.onclick = (e) => {
@@ -107,6 +116,15 @@ export class UI {
   _syncToolbar() {
     const fs = document.getElementById('formatSelect');
     if (fs) fs.value = this.store.format;
+    const ls = document.getElementById('layoutSelect');
+    if (ls) ls.value = this.store.slide.layout || 'text-bottom';
+  }
+
+  _bindFontSize() {
+    const smaller = document.getElementById('fontSmaller');
+    const larger = document.getElementById('fontLarger');
+    if (smaller) smaller.onclick = () => this.store.adjustFontSize(-4);
+    if (larger) larger.onclick = () => this.store.adjustFontSize(4);
   }
 
   // ---- Timeline ---------------------------------------------------------
