@@ -143,6 +143,15 @@ export class Store extends Emitter {
     else ['kicker', 'headline', 'subline', 'body'].forEach((f) => { this.slide.colors[f] = hex; });
   }
   setTextColor(hex) { this.applyTextColor(hex); this.commit('textcolor'); }
+  adjustFontSize(delta) {
+    const sel = this.selection;
+    if (sel?.kind !== 'text') return;
+    const defaults = { kicker: 30, headline: 92, subline: 42, body: 34 };
+    this.slide.fontSizes = this.slide.fontSizes || {};
+    const current = this.slide.fontSizes[sel.field] || defaults[sel.field] || 34;
+    this.slide.fontSizes[sel.field] = Math.max(14, Math.min(140, current + delta));
+    this.commit('fontsize');
+  }
   // DNA-/Helix-Overlay setzen (assetId) oder entfernen (null).
   setOverlay(assetId, asset) {
     this.slide.overlay = assetId
