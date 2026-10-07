@@ -27,6 +27,7 @@ export class UI {
     this._bindToolbar();
     this._bindTimeline();
     this._bindTray();
+    this._bindFontSize();
 
     renderer.onEditText = (field) => this.inlineEditor.open(field);
     renderer.onFrame = (t, dur) => this._syncTime(t, dur);
@@ -117,6 +118,13 @@ export class UI {
     if (fs) fs.value = this.store.format;
     const ls = document.getElementById('layoutSelect');
     if (ls) ls.value = this.store.slide.layout || 'text-bottom';
+  }
+
+  _bindFontSize() {
+    const smaller = document.getElementById('fontSmaller');
+    const larger = document.getElementById('fontLarger');
+    if (smaller) smaller.onclick = () => this.store.adjustFontSize(-4);
+    if (larger) larger.onclick = () => this.store.adjustFontSize(4);
   }
 
   // ---- Timeline ---------------------------------------------------------
