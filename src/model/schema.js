@@ -4,6 +4,7 @@
 
 import { DEFAULT_FORMAT } from './formats.js';
 import { DEFAULT_THEME } from './themes.js';
+import { DEFAULT_LAYOUT } from './layouts.js';
 
 export const SCHEMA_VERSION = 3;
 
@@ -25,6 +26,7 @@ function normSlide(s) {
   return {
     id: s.id || makeId('s'),
     role: s.role || 'item',
+    layout: s.layout || DEFAULT_LAYOUT,
     kicker: s.kicker ?? '',
     headline: s.headline ?? '',
     subline: s.subline ?? '',
