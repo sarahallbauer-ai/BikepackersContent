@@ -142,7 +142,7 @@ export function paintSlide(slide, deck, opts = {}) {
     return new Konva.Text({
       text: val, x: safe.x, y: 0, width: safe.w,
       fontFamily: fam, fontStyle: ty.weight,
-      fontSize: ty.size, lineHeight: ty.lh, letterSpacing: ty.spacing,
+      fontSize: slide.fontSizes?.[field] || ty.size, lineHeight: ty.lh, letterSpacing: ty.spacing,
       fill, align: 'left', wrap: 'word', listening: true,
       name: field,
     });
